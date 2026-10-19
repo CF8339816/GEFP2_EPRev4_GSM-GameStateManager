@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 #region coder & project
 /// <summary>
 /// NSCC GAME2025 / 4086 / Game Programming III(B)/ Doucette,Matthew
@@ -10,7 +11,7 @@ using UnityEngine;
 public class ServiceHub : MonoBehaviour
 {    public static ServiceHub Instance { get; private set; }// creates szervice hub instance 
     [Header("System References")]// defines other scripts
-    public Scenemanager customSceneManager;
+    public Custom_sceneManager customSceneManager;
     public GameManager gameManager;
     public GameExitManager gameExitManager;
     private void Awake()
@@ -22,7 +23,7 @@ public class ServiceHub : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject); //maintaains gameobject accross scenes
-        if (customSceneManager == null) customSceneManager = GetComponent<Scenemanager>();
+        if (customSceneManager == null) customSceneManager = GetComponent<Custom_sceneManager>();
         if (gameManager == null) gameManager = GetComponent<GameManager>();
         if (gameExitManager == null) gameExitManager = GetComponent<GameExitManager>();
     }

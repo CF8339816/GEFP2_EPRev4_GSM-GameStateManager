@@ -10,14 +10,21 @@ using UnityEngine.UI;
 /// 
 /// </summary>
 #endregion
-public class Scenemanager : MonoBehaviour
+public class Custom_sceneManager : MonoBehaviour
 {
     private GameManager gameManager;
     private GameExitManager gameExitManager;
-    private const int MENU_INDEX = 0;
+    private const int MAIN_INDEX = 0;
     private const int LEVEL_1_INDEX = 1;
     private const int LEVEL_2_INDEX = 2;
     private const int LEVEL_3_INDEX = 3;
+    private const int MENU_INDEX = 4;
+    private const int HUD_INDEX = 5;
+    private const int PAUSE_INDEX = 6;
+    private const int PLAYERE_INDEX = 7;
+    private const int ENVIRONMENT_INDEX = 8;
+    public int ResumeIndex;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -129,6 +136,20 @@ public class Scenemanager : MonoBehaviour
     public void onMenu()
     {
         LoadLevelByIndex(MENU_INDEX);
+
+    }
+    public void onResume()
+    {
+
+        LoadLevelByIndex(ResumeIndex);
+    }
+
+
+    public void onPause()
+    {
+
+        ResumeIndex = SceneManager.GetActiveScene().buildIndex;
+        LoadLevelByIndex(PAUSE_INDEX);
     }
     public void onStart()
     {

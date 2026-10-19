@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     private GameExitManager gameExitManager;
     private ServiceHub serviceHub;
-    private Scenemanager sceneManager;
+    private Custom_sceneManager customSceneManager;
     [Header("text output")]
     public TextMeshProUGUI textCurrentLevel;
     public TextMeshProUGUI textHealthText;
@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject); // maintains data              
         serviceHub = Object.FindFirstObjectByType<ServiceHub>();
-        sceneManager = Object.FindFirstObjectByType<Scenemanager>();
+        customSceneManager = Object.FindFirstObjectByType<Custom_sceneManager>();
         gameExitManager = Object.FindFirstObjectByType<GameExitManager>();
         onResetStats();
     }
