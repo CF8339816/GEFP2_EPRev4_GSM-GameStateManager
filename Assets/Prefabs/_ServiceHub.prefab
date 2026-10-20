@@ -50,11 +50,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8450c9df566f6944fa17fd6f356b1d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServiceHub
+  customSceneManager: {fileID: 7439604297415551193}
   hudManager: {fileID: 665933555107480523}
   menuManager: {fileID: 1240197563878807089}
   pauseManager: {fileID: 6467525476348777249}
   gameManager: {fileID: 7813943932155508176}
   gameExitManager: {fileID: 8201568613860812012}
+  cameraPrefab: {fileID: 1910174449803103464, guid: 4b71f3671a0cb6747a07fbdad9cde884, type: 3}
+  eventSystemPrefab: {fileID: 7666951801628866779, guid: bf50da4cf8d5ca84d8d51bd5993d2b07, type: 3}
+  _ServiceHub: {fileID: 1887375814404526371}
+  HUDManager: {fileID: 2626745046829248918, guid: 9c15a623bbcb77e40a89d3891095ebe7, type: 3}
+  PAUSEManager: {fileID: 6602611416005369634, guid: b058d7160585ac449ba7f1e2bf9ad164, type: 3}
+  MENUManager: {fileID: 1814913568870394584, guid: d27f416ac3c70bf4b98ff470f63dcf82, type: 3}
 --- !u!114 &7813943932155508176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,11 +93,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887375814404526371}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2435609c0c16f84095315574031d01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scenemanager
+  dude: {fileID: 527110599459933490, guid: 17d37f87c1e95df42baea5a6a831bb02, type: 3}
+  ReturnIndex: 0
 --- !u!114 &8201568613860812012
 MonoBehaviour:
   m_ObjectHideFlags: 0
