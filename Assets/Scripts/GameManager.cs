@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     private GameExitManager gameExitManager;
     private ServiceHub serviceHub;
     private Custom_sceneManager customSceneManager;
+    private MenuManager menuManager;
+    private HudManager hudManager;
+    private PauseManager pauseManager;
+
     [Header("text output")]
     public TextMeshProUGUI textCurrentLevel;
     public TextMeshProUGUI textHealthText;
@@ -50,6 +54,9 @@ public class GameManager : MonoBehaviour
         serviceHub = Object.FindFirstObjectByType<ServiceHub>();
         customSceneManager = Object.FindFirstObjectByType<Custom_sceneManager>();
         gameExitManager = Object.FindFirstObjectByType<GameExitManager>();
+        menuManager = Object.FindFirstObjectByType<MenuManager>();
+        hudManager = Object.FindFirstObjectByType<HudManager>();
+        pauseManager = Object.FindFirstObjectByType<PauseManager>();
         onResetStats();
     }
     private void Update()
@@ -73,7 +80,7 @@ public class GameManager : MonoBehaviour
         if (textCurrentLevel != null)
         {
             string CurrentScene = SceneManager.GetActiveScene().name;
-            textCurrentLevel.text = "Current Level Loaded: " +CurrentScene;
+            textCurrentLevel.text = "Current Level Loaded: " + CurrentScene;
         }
     }
     public void UpdateBagSpace()
@@ -86,19 +93,19 @@ public class GameManager : MonoBehaviour
     {
         healtBarOutput = currentHealthPercentage;
         HealthBar.value = healtBarOutput;
-        textHealthText.text = "Health %: " + currentHealthPercentage.ToString() + "\nHealth: " + currentHealth.ToString()  +"/" + maxHealth.ToString();
+        textHealthText.text = "Health %: " + currentHealthPercentage.ToString() + "\nHealth: " + currentHealth.ToString() + "/" + maxHealth.ToString();
     }
     public void onTakeDamage()
     {
         currentHealth -= DamageTaken;
-        if (currentHealth <= 0)  {   currentHealth = 0;  }
+        if (currentHealth <= 0) { currentHealth = 0; }
         CalculateHealthPercentage();
     }
     public void onTakeHealing()
-    {        
+    {
         currentHealth += healingDone;
-       if (currentHealth >= maxHealth)  {  currentHealth = maxHealth;   }
-        CalculateHealthPercentage(); 
+        if (currentHealth >= maxHealth) { currentHealth = maxHealth; }
+        CalculateHealthPercentage();
     }
     public void CalculateHealthPercentage()
     {
@@ -110,7 +117,7 @@ public class GameManager : MonoBehaviour
     }
     public void onRemoveItem()
     {
-        if (InventoryslotsUsed > 0) {   InventoryslotsUsed--;  }
+        if (InventoryslotsUsed > 0) { InventoryslotsUsed--; }
     }
     public void onResetStats()
     {

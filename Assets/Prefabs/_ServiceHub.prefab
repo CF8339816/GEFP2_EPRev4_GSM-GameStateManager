@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 7813943932155508176}
   - component: {fileID: 7439604297415551193}
   - component: {fileID: 8201568613860812012}
+  - component: {fileID: 665933555107480523}
+  - component: {fileID: 6467525476348777249}
+  - component: {fileID: 1240197563878807089}
   m_Layer: 0
   m_Name: _ServiceHub
   m_TagString: Untagged
@@ -47,7 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8450c9df566f6944fa17fd6f356b1d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ServiceHub
-  customSceneManager: {fileID: 7439604297415551193}
+  hudManager: {fileID: 665933555107480523}
+  menuManager: {fileID: 1240197563878807089}
+  pauseManager: {fileID: 6467525476348777249}
   gameManager: {fileID: 7813943932155508176}
   gameExitManager: {fileID: 8201568613860812012}
 --- !u!114 &7813943932155508176
@@ -81,7 +86,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887375814404526371}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2435609c0c16f84095315574031d01e, type: 3}
   m_Name: 
@@ -100,3 +105,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameExitManager
   ExitDelay: 5
   exitCountdownText: {fileID: 3878572355858392621, guid: 91062c270b0e02349b25cfff09683489, type: 3}
+--- !u!114 &665933555107480523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887375814404526371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52694c778c26e1744968ede3fd8e2e4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HudManager
+--- !u!114 &6467525476348777249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887375814404526371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 137362562221dce45b9dae85cf42c848, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+  dude: {fileID: 527110599459933490, guid: 17d37f87c1e95df42baea5a6a831bb02, type: 3}
+--- !u!114 &1240197563878807089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887375814404526371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1370c68bce237724d8f1971b18ea7089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuManager
+  dude: {fileID: 527110599459933490, guid: 17d37f87c1e95df42baea5a6a831bb02, type: 3}

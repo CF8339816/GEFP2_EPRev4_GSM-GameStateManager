@@ -121,8 +121,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Scenemanager, Assembly-CSharp
+      - m_Target: {fileID: 1240197563878807089, guid: f9389a794ba45584d824083d1488aa29, type: 3}
+        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: onLevel2
         m_Mode: 1
         m_Arguments:

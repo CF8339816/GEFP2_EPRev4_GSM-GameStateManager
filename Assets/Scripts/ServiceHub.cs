@@ -11,7 +11,10 @@ using UnityEngine.SceneManagement;
 public class ServiceHub : MonoBehaviour
 {    public static ServiceHub Instance { get; private set; }// creates szervice hub instance 
     [Header("System References")]// defines other scripts
-    public Custom_sceneManager customSceneManager;
+   // public Custom_sceneManager customSceneManager;
+    public HudManager hudManager;
+    public MenuManager menuManager; 
+    public PauseManager pauseManager;   
     public GameManager gameManager;
     public GameExitManager gameExitManager;
     private void Awake()
@@ -23,8 +26,11 @@ public class ServiceHub : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject); //maintaains gameobject accross scenes
-        if (customSceneManager == null) customSceneManager = GetComponent<Custom_sceneManager>();
+      //  if (customSceneManager == null) customSceneManager = GetComponent<Custom_sceneManager>();
         if (gameManager == null) gameManager = GetComponent<GameManager>();
         if (gameExitManager == null) gameExitManager = GetComponent<GameExitManager>();
+        if (hudManager == null) hudManager = GetComponent<HudManager>();
+        if (menuManager == null) menuManager = GetComponent<MenuManager>();
+        if (pauseManager == null) pauseManager = GetComponent<PauseManager>();
     }
 }
