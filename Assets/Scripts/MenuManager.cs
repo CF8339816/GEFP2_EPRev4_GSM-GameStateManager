@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -32,7 +33,9 @@ public class MenuManager : MonoBehaviour
     private const int ENVIRONMENT_INDEX = 8;
     private int RETURNLEVEL_INDEX;
     private int ReturnIndex;
- public void Awake()
+
+    private int nextIndex;
+    public void Awake()
     {
         //OnSceneLoaded(Scene, LoadSceneMode);
         Debug.Log("CustomSceneManager awakening...");
@@ -189,12 +192,20 @@ public class MenuManager : MonoBehaviour
     }
     public void onLoadNextLevel()
     {
-        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (SceneManager.GetActiveScene().buildIndex < 3)
+        { 
+            nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
         LoadLevelByIndex(nextIndex);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
+         }
+        else
+        {
+            onMenu();
+        }
+        
     }
 
     //public IEnumerator AddSceneLayers(int baseLevelIndex)

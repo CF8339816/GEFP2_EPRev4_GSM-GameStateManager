@@ -58,27 +58,27 @@ public class GameManager : MonoBehaviour
         //hudManager = Object.FindFirstObjectByType<HudManager>();
         //pauseManager = Object.FindFirstObjectByType<PauseManager>();
         //onResetStats();
-        hudManager.onResetStats();
+        //hudManager.onResetStats();
     }
     public void Update()
     {
-        FindUIElementsInNewScene();
+        //FindUIElementsInNewScene();
         //UpdateBagSpace();
         //UpdateHealthBar();
         //UpdateCurrentLevelOutput();
-        hudManager.UpdateBagSpace();
-        hudManager.UpdateHealthBar();
-        hudManager.UpdateCurrentLevelOutput();
+        //hudManager.UpdateBagSpace();
+        //hudManager.UpdateHealthBar();
+        //hudManager.UpdateCurrentLevelOutput();
     }
-    public void FindUIElementsInNewScene()// finds the ui entries after destroyed to re-valuate them
-    {        
-        if (hudManager.textHealthText == null) hudManager.textHealthText = GameObject.Find("HealthText")?.GetComponent<TextMeshProUGUI>();
-        if (hudManager.textInventoryAvaillabilityText == null) hudManager.textInventoryAvaillabilityText = GameObject.Find("InventoryAvaillabilityText")?.GetComponent<TextMeshProUGUI>();
-        if (hudManager.HealthBar == null) hudManager.HealthBar = GameObject.Find("HealthBar")?.GetComponent<Slider>();
-        if (hudManager.InventoryCapacity == null) hudManager.InventoryCapacity = GameObject.Find("InventoryCapacity")?.GetComponent<Slider>();
-        if (hudManager.textCurrentLevel == null) hudManager.textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
+    //public void FindUIElementsInNewScene()// finds the ui entries after destroyed to re-valuate them
+    //{        
+    //    if (hudManager.textHealthText == null) hudManager.textHealthText = GameObject.Find("HealthText")?.GetComponent<TextMeshProUGUI>();
+    //    if (hudManager.textInventoryAvaillabilityText == null) hudManager.textInventoryAvaillabilityText = GameObject.Find("InventoryAvaillabilityText")?.GetComponent<TextMeshProUGUI>();
+    //    if (hudManager.HealthBar == null) hudManager.HealthBar = GameObject.Find("HealthBar")?.GetComponent<Slider>();
+    //    if (hudManager.InventoryCapacity == null) hudManager.InventoryCapacity = GameObject.Find("InventoryCapacity")?.GetComponent<Slider>();
+    //    if (hudManager.textCurrentLevel == null) hudManager.textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
 
-    }
+    //}
     //    public void UpdateCurrentLevelOutput()
     //    {
     //        if (hudManager.textCurrentLevel != null)

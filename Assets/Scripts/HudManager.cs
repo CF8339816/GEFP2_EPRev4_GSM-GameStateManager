@@ -64,6 +64,7 @@ public class HudManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
 
         AutoHookupButtons();
+        FindUIElementsInNewScene();
 
     }
     private void OnEnable()
@@ -75,7 +76,15 @@ public class HudManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-   
+    public void FindUIElementsInNewScene()// finds the ui entries after destroyed to re-valuate them
+    {
+        if (textHealthText == null) textHealthText = GameObject.Find("HealthText")?.GetComponent<TextMeshProUGUI>();
+        if (textInventoryAvaillabilityText == null) textInventoryAvaillabilityText = GameObject.Find("InventoryAvaillabilityText")?.GetComponent<TextMeshProUGUI>();
+        if (HealthBar == null) HealthBar = GameObject.Find("HealthBar")?.GetComponent<Slider>();
+        if (InventoryCapacity == null) InventoryCapacity = GameObject.Find("InventoryCapacity")?.GetComponent<Slider>();
+        if (textCurrentLevel == null) textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
+
+    }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AutoHookupButtons();
