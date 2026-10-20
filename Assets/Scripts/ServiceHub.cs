@@ -21,10 +21,10 @@ public class ServiceHub : MonoBehaviour
 
     public GameObject cameraPrefab;
     public GameObject eventSystemPrefab;
-    public GameObject _ServiceHub;
-    public GameObject HUDManager;
-    public GameObject PAUSEManager;
-    public GameObject MENUManager;
+    //public GameObject _ServiceHub;
+    //public GameObject HUDManager;
+    //public GameObject PAUSEManager;
+    //public GameObject MENUManager;
 
     private void Awake()
     {
@@ -41,14 +41,11 @@ public class ServiceHub : MonoBehaviour
         if (hudManager == null) hudManager = GetComponent<HudManager>();
         if (menuManager == null) menuManager = GetComponent<MenuManager>();
         if (pauseManager == null) pauseManager = GetComponent<PauseManager>();
-
         InitializeGlobalEventSystem();
         InitializeGlobalCameraSystem();
     }
-
     private void InitializeGlobalEventSystem()
     {
-
         EventSystem existingSystem = Object.FindFirstObjectByType<EventSystem>();// checks for extra event systems
 
         if (existingSystem != null)
@@ -64,22 +61,15 @@ public class ServiceHub : MonoBehaviour
     }
     private void InitializeGlobalCameraSystem() 
     {
-       
         Camera existingCamera = Object.FindFirstObjectByType<Camera>();
-
         if (existingCamera != null)
         {
-           
             DontDestroyOnLoad(existingCamera.gameObject);
         }
         else if (cameraPrefab != null)
         {
-            
             GameObject spawnedCamera = Instantiate(cameraPrefab);
-
-          
             spawnedCamera.name = "Global_CameraSystem";
-
             DontDestroyOnLoad(spawnedCamera);
         }
     }

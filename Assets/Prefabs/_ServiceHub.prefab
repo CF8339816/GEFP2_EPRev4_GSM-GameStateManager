@@ -58,10 +58,6 @@ MonoBehaviour:
   gameExitManager: {fileID: 8201568613860812012}
   cameraPrefab: {fileID: 1910174449803103464, guid: 4b71f3671a0cb6747a07fbdad9cde884, type: 3}
   eventSystemPrefab: {fileID: 7666951801628866779, guid: bf50da4cf8d5ca84d8d51bd5993d2b07, type: 3}
-  _ServiceHub: {fileID: 1887375814404526371}
-  HUDManager: {fileID: 2626745046829248918, guid: 9c15a623bbcb77e40a89d3891095ebe7, type: 3}
-  PAUSEManager: {fileID: 6602611416005369634, guid: b058d7160585ac449ba7f1e2bf9ad164, type: 3}
-  MENUManager: {fileID: 1814913568870394584, guid: d27f416ac3c70bf4b98ff470f63dcf82, type: 3}
 --- !u!114 &7813943932155508176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,18 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d76deada3cc854e81ed42a4136fde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  textCurrentLevel: {fileID: 1777489927517506853, guid: a57eb531b8ba70347b8b0654f58c7cd4, type: 3}
-  textHealthText: {fileID: 1038304739855121096, guid: 84717daa13dcd4547beb94d9cc6d809a, type: 3}
-  textInventoryAvaillabilityText: {fileID: 2721504607572633492, guid: 9a81feb2239ec7146a3074e4ee7705ee, type: 3}
-  HealthBar: {fileID: 3457725375876429455, guid: a004f1488779f5e49981c103c17a745b, type: 3}
-  InventoryCapacity: {fileID: 4399734942442439765, guid: e432995154af1404693ddf8251494ea3, type: 3}
-  HealthBarMax: 100
-  healingDone: 12
-  DamageTaken: 21
-  currentHealth: 0
-  maxHealth: 200
-  InventoryBarMax: 24
-  InventoryslotsUsed: 0
 --- !u!114 &7439604297415551193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +110,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52694c778c26e1744968ede3fd8e2e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HudManager
+  textCurrentLevel: {fileID: 1777489927517506853, guid: a57eb531b8ba70347b8b0654f58c7cd4, type: 3}
+  textHealthText: {fileID: 1038304739855121096, guid: 84717daa13dcd4547beb94d9cc6d809a, type: 3}
+  textInventoryAvaillabilityText: {fileID: 2721504607572633492, guid: 9a81feb2239ec7146a3074e4ee7705ee, type: 3}
+  HealthBar: {fileID: 3457725375876429455, guid: a004f1488779f5e49981c103c17a745b, type: 3}
+  InventoryCapacity: {fileID: 4399734942442439765, guid: e432995154af1404693ddf8251494ea3, type: 3}
+  HealthBarMax: 100
+  HealthBarMin: 0
+  healingDone: 12
+  DamageTaken: 21
+  currentHealthPercentage: 0
+  healtBarOutput: 0
+  currentHealth: 0
+  maxHealth: 200
+  InventoryBarMax: 24
+  InventoryBarMin: 0
+  InventoryslotsUsed: 0
+  InventorySpaceAvailable: 0
 --- !u!114 &6467525476348777249
 MonoBehaviour:
   m_ObjectHideFlags: 0

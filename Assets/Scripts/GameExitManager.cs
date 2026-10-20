@@ -38,20 +38,33 @@ public class GameExitManager : MonoBehaviour
         if (!isExiting)
         {
             isExiting = true;
-            StartCoroutine(StartExitCountdown());
+           ExitCountdown();
+            //StartCoroutine(StartExitCountdown());
         }
     }
-    public IEnumerator StartExitCountdown()
+    public void ExitCountdown()
     {
-        while (Countdown > 0)
+        if (Countdown > 0)
         {
             exitCountdownText.text = "Game Exit in: " + Mathf.Ceil(Countdown).ToString();// displays the countdown output in an always rounded up to whole int
-            yield return null;
+            //yield return null;
             Countdown -= Time.deltaTime;
         }
-        exitCountdownText.text = "Exiting...";
+        //exitCountdownText.text = "Exiting...";
         ExitGame();
     }
+
+    //public IEnumerator StartExitCountdown()
+    //{
+    //    while (Countdown > 0)
+    //    {
+    //        exitCountdownText.text = "Game Exit in: " + Mathf.Ceil(Countdown).ToString();// displays the countdown output in an always rounded up to whole int
+    //        yield return null;
+    //        Countdown -= Time.deltaTime;
+    //    }
+    //    exitCountdownText.text = "Exiting...";
+    //    ExitGame();
+    //}
     private void ResetCountdown()
     {
         Countdown = ExitDelay;

@@ -31,7 +31,21 @@ public class PauseManager : MonoBehaviour
     private const int ENVIRONMENT_INDEX = 8;
     private int RETURNLEVEL_INDEX;
     private int ReturnIndex;
+ public void Awake()
+    {
+        //OnSceneLoaded(Scene, LoadSceneMode);
+        Debug.Log("CustomSceneManager awakening...");
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
 
+        AutoHookupButtons();
+
+    }
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -41,14 +55,7 @@ public class PauseManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    public void Awake()
-    {
-        //OnSceneLoaded(Scene, LoadSceneMode);
-
-
-        AutoHookupButtons();
-
-    }
+   
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AutoHookupButtons();
@@ -97,7 +104,8 @@ public class PauseManager : MonoBehaviour
     public void onMenu()
     {
         LoadLevelByIndex(MAIN_INDEX);
-        StartCoroutine(AddBaseMenuLayer(MAIN_INDEX));
+        SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+      //  StartCoroutine(AddBaseMenuLayer(MAIN_INDEX));
         // LoadLevelByIndex(MENU_INDEX);
 
     }
@@ -122,7 +130,11 @@ public class PauseManager : MonoBehaviour
 
         RETURNLEVEL_INDEX = ReturnIndex;
         LoadLevelByIndex(RETURNLEVEL_INDEX);
-     
+        SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
+
 
 
         //StartCoroutine(AddSceneLayers(RETURNLEVEL_INDEX));
@@ -143,29 +155,37 @@ public class PauseManager : MonoBehaviour
     {
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.onResetStats();
+            HudManager.Instance.onResetStats();
             menuManager.onLevel1();
+            SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+            SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
+            SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
+            SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
         }
     }
     public void onLoadNextLevel()
     {
         int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
         LoadLevelByIndex(nextIndex);
+        SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
     }
 
-    public IEnumerator AddBaseMenuLayer(int baseLevelIndex)
-    {
-        yield return SceneManager.LoadSceneAsync(baseLevelIndex, LoadSceneMode.Single);// load active level and wait till complete        
-        yield return SceneManager.LoadSceneAsync(MENU_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
+    //public IEnumerator AddBaseMenuLayer(int baseLevelIndex)
+    //{
+    //    yield return SceneManager.LoadSceneAsync(baseLevelIndex, LoadSceneMode.Single);// load active level and wait till complete        
+    //    yield return SceneManager.LoadSceneAsync(MENU_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
 
-        Scene baseScene = SceneManager.GetSceneByBuildIndex(baseLevelIndex);// makse sure added objects  owned by base layer
-        if (baseScene.IsValid())
-        {
-            SceneManager.SetActiveScene(baseScene);
-        }
-        yield return null;
+    //    Scene baseScene = SceneManager.GetSceneByBuildIndex(baseLevelIndex);// makse sure added objects  owned by base layer
+    //    if (baseScene.IsValid())
+    //    {
+    //        SceneManager.SetActiveScene(baseScene);
+    //    }
+    //    yield return null;
 
-    }
+    //}
 
     //public IEnumerator AddSceneLayers(int baseLevelIndex)
     //{

@@ -1,7 +1,8 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
 #region coder & project
 /// <summary>
 /// NSCC GAME2025 / 4086 / Game Programming III(B)/ Doucette,Matthew
@@ -28,6 +29,43 @@ public class HudManager : MonoBehaviour
     private int RETURNLEVEL_INDEX;
     private int ReturnIndex;
 
+    [Header("text output")]
+    public TextMeshProUGUI textCurrentLevel;
+    public TextMeshProUGUI textHealthText;
+    public TextMeshProUGUI textInventoryAvaillabilityText;
+    [Header("sliders")]
+    [SerializeField] public Slider HealthBar;
+    [SerializeField] public Slider InventoryCapacity;
+    [Header("health")]
+    public static int HealthBarMax = 100;
+    public static int HealthBarMin = 0;
+    [SerializeField] public int healingDone = 12;
+    [SerializeField] public int DamageTaken = 21;
+    public int currentHealthPercentage;
+    public int healtBarOutput;
+    public float currentHealth;
+    [SerializeField] public float maxHealth;
+    [Header("inventory")]
+    [SerializeField] public int InventoryBarMax = 24;
+    public static int InventoryBarMin = 0;
+    public int InventoryslotsUsed;
+    public int InventorySpaceAvailable;
+
+    public void Awake()
+    {
+        //OnSceneLoaded(Scene, LoadSceneMode);
+        Debug.Log("CustomSceneManager awakening...");
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
+
+        AutoHookupButtons();
+
+    }
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -37,14 +75,7 @@ public class HudManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    public void Awake()
-    {
-        //OnSceneLoaded(Scene, LoadSceneMode);
-
-
-        AutoHookupButtons();
-
-    }
+   
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AutoHookupButtons();
@@ -52,86 +83,86 @@ public class HudManager : MonoBehaviour
     private void AutoHookupButtons()
     {
        
-        if (GameManager.Instance != null)
+        if (HudManager.Instance != null)
         {
             Button takeDamageButton = GameObject.Find("takeDamage")?.GetComponent<Button>();
             if (takeDamageButton != null)
             {
                 takeDamageButton.onClick.RemoveAllListeners();
-                takeDamageButton.onClick.AddListener(GameManager.Instance.onTakeDamage);
+                takeDamageButton.onClick.AddListener(HudManager.Instance.onTakeDamage);
             }
             Button HealButton = GameObject.Find("Heal")?.GetComponent<Button>();
             if (HealButton != null)
             {
                 HealButton.onClick.RemoveAllListeners();
-                HealButton.onClick.AddListener(GameManager.Instance.onTakeHealing);
+                HealButton.onClick.AddListener(HudManager.Instance.onTakeHealing);
             }
             Button AddItemButton = GameObject.Find("AddItem")?.GetComponent<Button>();
             if (AddItemButton != null)
             {
                 AddItemButton.onClick.RemoveAllListeners();
-                AddItemButton.onClick.AddListener(GameManager.Instance.onAddItem);
+                AddItemButton.onClick.AddListener(HudManager.Instance.onAddItem);
             }
             Button removeItemButton = GameObject.Find("removeItem")?.GetComponent<Button>();
             if (removeItemButton != null)
             {
                 removeItemButton.onClick.RemoveAllListeners();
-                removeItemButton.onClick.AddListener(GameManager.Instance.onRemoveItem);
+                removeItemButton.onClick.AddListener(HudManager.Instance.onRemoveItem);
             }
         }
     }
-    //public void UpdateCurrentLevelOutput()
-    //{
-    //    if (textCurrentLevel != null)
-    //    {
-    //        string CurrentScene = SceneManager.GetActiveScene().name;
-    //        textCurrentLevel.text = "Current Level Loaded: " + CurrentScene;
-    //    }
-    //}
-    //public void UpdateBagSpace()
-    //{
-    //    InventorySpaceAvailable = InventoryBarMax - InventoryslotsUsed;
-    //    InventoryCapacity.value = InventoryslotsUsed;
-    //    textInventoryAvaillabilityText.text = "Slots available" + InventorySpaceAvailable.ToString() + "\nInventory used: " + InventoryslotsUsed.ToString() + "/" + InventoryBarMax.ToString();
-    //}
-    //public void UpdateHealthBar()
-    //{
-    //    healtBarOutput = currentHealthPercentage;
-    //    HealthBar.value = healtBarOutput;
-    //    textHealthText.text = "Health %: " + currentHealthPercentage.ToString() + "\nHealth: " + currentHealth.ToString() + "/" + maxHealth.ToString();
-    //}
-    //public void onTakeDamage()
-    //{
-    //    currentHealth -= DamageTaken;
-    //    if (currentHealth <= 0) { currentHealth = 0; }
-    //    CalculateHealthPercentage();
-    //}
-    //public void onTakeHealing()
-    //{
-    //    currentHealth += healingDone;
-    //    if (currentHealth >= maxHealth) { currentHealth = maxHealth; }
-    //    CalculateHealthPercentage();
-    //}
-    //public void CalculateHealthPercentage()
-    //{
-    //    currentHealthPercentage = Mathf.RoundToInt((currentHealth / maxHealth) * 100);
-    //}
-    //public void onAddItem()
-    //{
-    //    if (InventoryslotsUsed < InventoryBarMax) { InventoryslotsUsed++; }
-    //}
-    //public void onRemoveItem()
-    //{
-    //    if (InventoryslotsUsed > 0) { InventoryslotsUsed--; }
-    //}
-    //public void onResetStats()
-    //{
-    //    currentHealth = maxHealth;
-    //    InventoryslotsUsed = 0;
-    //    CalculateHealthPercentage();
-    //    if (HealthBar != null) { HealthBar.value = currentHealthPercentage; }
-    //    if (InventoryCapacity != null) { InventoryCapacity.value = InventoryslotsUsed; }
-    //}
+    public void UpdateCurrentLevelOutput()
+    {
+        if (textCurrentLevel != null)
+        {
+            string CurrentScene = SceneManager.GetActiveScene().name;
+            textCurrentLevel.text = "Current Level Loaded: " + CurrentScene;
+        }
+    }
+    public void UpdateBagSpace()
+    {
+        InventorySpaceAvailable = InventoryBarMax - InventoryslotsUsed;
+        InventoryCapacity.value = InventoryslotsUsed;
+        textInventoryAvaillabilityText.text = "Slots available" + InventorySpaceAvailable.ToString() + "\nInventory used: " + InventoryslotsUsed.ToString() + "/" + InventoryBarMax.ToString();
+    }
+    public void UpdateHealthBar()
+    {
+        healtBarOutput = currentHealthPercentage;
+        HealthBar.value = healtBarOutput;
+        textHealthText.text = "Health %: " + currentHealthPercentage.ToString() + "\nHealth: " + currentHealth.ToString() + "/" + maxHealth.ToString();
+    }
+    public void onTakeDamage()
+    {
+        currentHealth -= DamageTaken;
+        if (currentHealth <= 0) { currentHealth = 0; }
+        CalculateHealthPercentage();
+    }
+    public void onTakeHealing()
+    {
+        currentHealth += healingDone;
+        if (currentHealth >= maxHealth) { currentHealth = maxHealth; }
+        CalculateHealthPercentage();
+    }
+    public void CalculateHealthPercentage()
+    {
+        currentHealthPercentage = Mathf.RoundToInt((currentHealth / maxHealth) * 100);
+    }
+    public void onAddItem()
+    {
+        if (InventoryslotsUsed < InventoryBarMax) { InventoryslotsUsed++; }
+    }
+    public void onRemoveItem()
+    {
+        if (InventoryslotsUsed > 0) { InventoryslotsUsed--; }
+    }
+    public void onResetStats()
+    {
+        currentHealth = maxHealth;
+        InventoryslotsUsed = 0;
+        CalculateHealthPercentage();
+        if (HealthBar != null) { HealthBar.value = currentHealthPercentage; }
+        if (InventoryCapacity != null) { InventoryCapacity.value = InventoryslotsUsed; }
+    }
     //---------------------------------------------------------------------------------------------------------------------------------------------------------
     //public IEnumerator AddSceneLayers(int baseLevelIndex)
     //{
