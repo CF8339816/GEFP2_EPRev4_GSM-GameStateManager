@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 #region coder & project
 /// <summary>
 /// NSCC GAME2025 / 4086 / Game Programming III(B)/ Doucette,Matthew
-/// Unity: Game Manager & Persistence
+/// Engine Programming Review 05  UI Management (UIManager)
 /// Coder current script: Chris French Second Year NSCC Game Programming 
-/// Additions / annotations: Fixed naming conflict with Unity's built-in SceneManager.
+/// Additions / annotations:
+/// 
 /// </summary>
-#endregion
 public class ServiceHub : MonoBehaviour
 {    public static ServiceHub Instance { get; private set; }// creates szervice hub instance 
     [Header("System References")]// defines other scripts

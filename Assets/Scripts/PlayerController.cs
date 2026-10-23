@@ -4,12 +4,11 @@ using UnityEngine.SceneManagement;
 #region coder & project
 /// <summary>
 /// NSCC GAME2025 / 4086 / Game Programming III(B)/ Doucette,Matthew
-/// Unity: Player Input Controller Integration
+/// Engine Programming Review 05  UI Management (UIManager)
 /// Coder current script: Chris French Second Year NSCC Game Programming 
-/// Additions / annotations: Integrated modern Input System while maintaining architecture flow.
+/// Additions / annotations:
+/// 
 /// </summary>
-#endregion
-
 
 public class PlayerController : MonoBehaviour
 {    

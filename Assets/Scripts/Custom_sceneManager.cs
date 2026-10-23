@@ -5,12 +5,11 @@ using System.Collections;
 #region coder & project
 /// <summary>
 /// NSCC GAME2025 / 4086 / Game Programming III(B)/ Doucette,Matthew
-/// Unity: Game Manager & Persistence
+/// Engine Programming Review 05  UI Management (UIManager)
 /// Coder current script: Chris French Second Year NSCC Game Programming 
 /// Additions / annotations:
 /// 
 /// </summary>
-#endregion
 public class Custom_sceneManager : MonoBehaviour
 {
 
