@@ -29,9 +29,10 @@ public class PauseManager : MonoBehaviour
     private const int PAUSE_INDEX = 6;
     private const int PLAYER_INDEX = 7;
     private const int ENVIRONMENT_INDEX = 8;
+    private const int SHOP_INDEX = 9;
     private int RETURNLEVEL_INDEX;
     private int ReturnIndex;
- public void Awake()
+    public void Awake()
     {
         //OnSceneLoaded(Scene, LoadSceneMode);
         Debug.Log("CustomSceneManager awakening...");

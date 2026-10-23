@@ -20,18 +20,29 @@ public class ShopManager : MonoBehaviour
     private GameExitManager gameExitManager;
     private ServiceHub serviceHub;
     //private SceneManager sceneManager;
-    private CustomSceneManager customSceneManager;
+    private Custom_sceneManager customSceneManager;
     private HudManager hudManager;
     private MenuManager menuManager;
     //private ShopManager shopManager;
-
+    private int targetReturnIndex;
     [SerializeField] private Button Buy;
     [SerializeField] private Button Sell;
     [SerializeField] private Button ExitShop;
 
-
+    private const int MAIN_INDEX = 0;
+    private const int LEVEL_1_INDEX = 1;
+    private const int LEVEL_2_INDEX = 2;
+    private const int LEVEL_3_INDEX = 3;
+    private const int MENU_INDEX = 4;
+    private const int HUD_INDEX = 5;
+    private const int PAUSE_INDEX = 6;
+    private const int PLAYER_INDEX = 7;
+    private const int ENVIRONMENT_INDEX = 8;
+    private const int SHOP_INDEX = 9;
     private int RETURNLEVEL_INDEX;
-    public int ReturnIndex;
+    private int ReturnIndex;
+
+  
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -53,9 +64,6 @@ public class ShopManager : MonoBehaviour
 
         ShopManager shopManager = ShopManager.Instance;// reinitalize the scene manager
 
-
-
-
         if (Buy != null)
         {
             Buy.onClick.RemoveAllListeners();
@@ -75,25 +83,23 @@ public class ShopManager : MonoBehaviour
         else
         {
             Debug.LogWarning("❌ Could NOT find Button GameObject named: Sell");
-        }
-        if (ExitShop != null)
-        {
-            ExitShop.onClick.RemoveAllListeners();
-            ExitShop.onClick.AddListener(customSceneManager.onExitShop);
-            Debug.Log("🎯 Found and linked: ExitShop");
-        }
-        else
-        {
-            Debug.LogWarning("❌ Could NOT find Button GameObject named: ExitShop");
-        }
-
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.ConnectUI();
-        }
+        }                
+       
         if (GameExitManager.Instance != null)
         {
             GameExitManager.Instance.ConnectExitUI();
         }
+    }
+
+    public void onExitShop()
+    {
+        RETURNLEVEL_INDEX = ReturnIndex;
+        menuManager.LoadLevelByIndex(RETURNLEVEL_INDEX);
+        SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
+
+      
     }
 }

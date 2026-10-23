@@ -30,7 +30,13 @@ public class GameExitManager : MonoBehaviour
     }
     private void Update()
     {
-        if (exitCountdownText == null)   {   exitCountdownText = GameObject.Find("exitCountdownText")?.GetComponent<TextMeshProUGUI>();   }
+        ConnectExitUI();
+    }
+
+    public void ConnectExitUI()
+    {
+        if (exitCountdownText == null) { exitCountdownText = GameObject.Find("exitCountdownText")?.GetComponent<TextMeshProUGUI>(); }
+
     }
     public void Ongameexit()
     {
@@ -38,7 +44,7 @@ public class GameExitManager : MonoBehaviour
         {
             isExiting = true;
            ExitCountdown();
-            //StartCoroutine(StartExitCountdown());
+       
         }
     }
     public void ExitCountdown()
@@ -49,21 +55,11 @@ public class GameExitManager : MonoBehaviour
             //yield return null;
             Countdown -= Time.deltaTime;
         }
-        //exitCountdownText.text = "Exiting...";
+       
         ExitGame();
     }
 
-    //public IEnumerator StartExitCountdown()
-    //{
-    //    while (Countdown > 0)
-    //    {
-    //        exitCountdownText.text = "Game Exit in: " + Mathf.Ceil(Countdown).ToString();// displays the countdown output in an always rounded up to whole int
-    //        yield return null;
-    //        Countdown -= Time.deltaTime;
-    //    }
-    //    exitCountdownText.text = "Exiting...";
-    //    ExitGame();
-    //}
+    
     private void ResetCountdown()
     {
         Countdown = ExitDelay;

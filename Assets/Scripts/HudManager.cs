@@ -27,6 +27,7 @@ public class HudManager : MonoBehaviour
     private const int PAUSE_INDEX = 6;
     private const int PLAYER_INDEX = 7;
     private const int ENVIRONMENT_INDEX = 8;
+    private const int SHOP_INDEX = 9;
     private int RETURNLEVEL_INDEX;
     private int ReturnIndex;
 
@@ -173,19 +174,5 @@ public class HudManager : MonoBehaviour
         if (HealthBar != null) { HealthBar.value = currentHealthPercentage; }
         if (InventoryCapacity != null) { InventoryCapacity.value = InventoryslotsUsed; }
     }
-    //---------------------------------------------------------------------------------------------------------------------------------------------------------
-    //public IEnumerator AddSceneLayers(int baseLevelIndex)
-    //{
-    //    yield return SceneManager.LoadSceneAsync(baseLevelIndex, LoadSceneMode.Single);// load active level and wait till complete        
-    //    yield return SceneManager.LoadSceneAsync(MENU_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(HUD_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(PLAYER_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(ENVIRONMENT_INDEX, LoadSceneMode.Additive);// load scene layer fully 
-    //    Scene baseScene = SceneManager.GetSceneByBuildIndex(baseLevelIndex);// makse sure added objects  owned by base layer
-    //    if (baseScene.IsValid())
-    //    {
-    //        SceneManager.SetActiveScene(baseScene);
-    //    }
-    //    yield return null;
-    //}
+  
 }

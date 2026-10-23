@@ -14,17 +14,15 @@ public class ServiceHub : MonoBehaviour
     [Header("System References")]// defines other scripts
     public Custom_sceneManager customSceneManager;
     public HudManager hudManager;
-    public MenuManager menuManager; 
+    public MenuManager menuManager;
+    public ShopManager shopManager;
     public PauseManager pauseManager;   
     public GameManager gameManager;
     public GameExitManager gameExitManager;
 
     public GameObject cameraPrefab;
     public GameObject eventSystemPrefab;
-    //public GameObject _ServiceHub;
-    //public GameObject HUDManager;
-    //public GameObject PAUSEManager;
-    //public GameObject MENUManager;
+ 
 
     private void Awake()
     {
