@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 /// Additions / annotations:
 /// 
 /// </summary>
+#endregion
 public class GameExitManager : MonoBehaviour
 {
     public static GameExitManager Instance { get; private set; }

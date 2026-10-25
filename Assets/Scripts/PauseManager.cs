@@ -106,17 +106,12 @@ public class PauseManager : MonoBehaviour
     {
         LoadLevelByIndex(MAIN_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
-      //  StartCoroutine(AddBaseMenuLayer(MAIN_INDEX));
-        // LoadLevelByIndex(MENU_INDEX);
+     LoadLevelByIndex(MENU_INDEX);
 
     }
     public void onResume(int targetReturnIndex)
     {
 
-        //if (characterController == null)
-        //{
-        //    dude.SetActive(true);
-        //}
         if (targetReturnIndex > 0)
         {
             if (dude != null)
@@ -138,20 +133,12 @@ public class PauseManager : MonoBehaviour
 
 
 
-        //StartCoroutine(AddSceneLayers(RETURNLEVEL_INDEX));
+       
 
     }
 
 
-    //public void onPause()
-    //{
-    //    if (characterController == null)
-    //    { 
-    //        dude.SetActive( false); 
-    //    }
-    //    ReturnIndex = SceneManager.GetActiveScene().buildIndex;
-    //    LoadLevelByIndex(PAUSE_INDEX);
-    //}
+ 
     public void onStart()
     {
         if (GameManager.Instance != null)
@@ -173,34 +160,5 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
     }
-
-    //public IEnumerator AddBaseMenuLayer(int baseLevelIndex)
-    //{
-    //    yield return SceneManager.LoadSceneAsync(baseLevelIndex, LoadSceneMode.Single);// load active level and wait till complete        
-    //    yield return SceneManager.LoadSceneAsync(MENU_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-
-    //    Scene baseScene = SceneManager.GetSceneByBuildIndex(baseLevelIndex);// makse sure added objects  owned by base layer
-    //    if (baseScene.IsValid())
-    //    {
-    //        SceneManager.SetActiveScene(baseScene);
-    //    }
-    //    yield return null;
-
-    //}
-
-    //public IEnumerator AddSceneLayers(int baseLevelIndex)
-    //{
-    //    yield return SceneManager.LoadSceneAsync(baseLevelIndex, LoadSceneMode.Single);// load active level and wait till complete        
-    //    yield return SceneManager.LoadSceneAsync(MENU_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(HUD_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(PLAYER_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(ENVIRONMENT_INDEX, LoadSceneMode.Additive);// load scene layer fully 
-    //    Scene baseScene = SceneManager.GetSceneByBuildIndex(baseLevelIndex);// makse sure added objects  owned by base layer
-    //    if (baseScene.IsValid())
-    //    {
-    //        SceneManager.SetActiveScene(baseScene);
-    //    }
-    //    yield return null;
-    //}
 
 }

@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 /// Additions / annotations:
 /// 
 /// </summary>
+#endregion
 
 public class PlayerController : MonoBehaviour
 {    

@@ -10,6 +10,8 @@ using System.Collections;
 /// Additions / annotations:
 /// 
 /// </summary>
+
+#endregion
 public class Custom_sceneManager : MonoBehaviour
 {
 
@@ -48,7 +50,7 @@ public class Custom_sceneManager : MonoBehaviour
         Debug.Log(" Menu  awakening...");
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         Debug.Log(" menu loaded...");
-    
+
 
     }
     private void OnEnable()

@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 /// Additions / annotations:
 /// 
 /// </summary>
+#endregion
 public class ServiceHub : MonoBehaviour
 {    public static ServiceHub Instance { get; private set; }// creates szervice hub instance 
     [Header("System References")]// defines other scripts
