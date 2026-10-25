@@ -10,6 +10,7 @@ using System.Collections;
 /// Additions / annotations:
 /// 
 /// </summary>
+#endregion
 public class Custom_sceneManager : MonoBehaviour
 {
 

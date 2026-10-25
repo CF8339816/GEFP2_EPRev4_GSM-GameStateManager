@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 /// Additions / annotations:
 /// 
 /// </summary>
-
+#endregion
 public class PlayerController : MonoBehaviour
 {    
     [SerializeField] private float moveSpeed = 5f;

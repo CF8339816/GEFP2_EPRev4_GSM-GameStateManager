@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance { get; private set; }
     private GameManager gameManager;
     private GameExitManager gameExitManager;
-  //  private CharacterController characterController;
+ 
     [SerializeField] GameObject dude;
 
     private const int MAIN_INDEX = 0;
@@ -37,7 +37,7 @@ public class MenuManager : MonoBehaviour
     private int nextIndex;
     public void Awake()
     {
-        //OnSceneLoaded(Scene, LoadSceneMode);
+       
         Debug.Log("CustomSceneManager awakening...");
         if (Instance != null && Instance != this)
         {
