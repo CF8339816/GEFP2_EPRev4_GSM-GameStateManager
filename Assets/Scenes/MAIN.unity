@@ -307,6 +307,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _ServiceHub
       objectReference: {fileID: 0}
+    - target: {fileID: 3300868998138261902, guid: f9389a794ba45584d824083d1488aa29, type: 3}
+      propertyPath: shopManager
+      value: 
+      objectReference: {fileID: 1050615000}
     - target: {fileID: 5807701866550425621, guid: f9389a794ba45584d824083d1488aa29, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.19731
@@ -350,8 +354,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1887375814404526371, guid: f9389a794ba45584d824083d1488aa29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1050615000}
   m_SourcePrefab: {fileID: 100100000, guid: f9389a794ba45584d824083d1488aa29, type: 3}
+--- !u!1 &1050614999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1887375814404526371, guid: f9389a794ba45584d824083d1488aa29, type: 3}
+  m_PrefabInstance: {fileID: 1050614998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1050615000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050614999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8964bf56dd76714449b33cecca2790e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  Buy: {fileID: 0}
+  Sell: {fileID: 0}
+  ExitShop: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

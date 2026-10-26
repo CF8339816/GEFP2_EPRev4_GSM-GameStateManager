@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 665933555107480523}
   - component: {fileID: 6467525476348777249}
   - component: {fileID: 1240197563878807089}
+  - component: {fileID: 8553574725003972721}
   m_Layer: 0
   m_Name: _ServiceHub
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   customSceneManager: {fileID: 7439604297415551193}
   hudManager: {fileID: 665933555107480523}
   menuManager: {fileID: 1240197563878807089}
+  shopManager: {fileID: 8553574725003972721}
   pauseManager: {fileID: 6467525476348777249}
   gameManager: {fileID: 7813943932155508176}
   gameExitManager: {fileID: 8201568613860812012}
@@ -83,7 +85,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Scenemanager
   dude: {fileID: 527110599459933490, guid: 17d37f87c1e95df42baea5a6a831bb02, type: 3}
-  ReturnIndex: 0
 --- !u!114 &8201568613860812012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +116,6 @@ MonoBehaviour:
   textInventoryAvaillabilityText: {fileID: 2721504607572633492, guid: 9a81feb2239ec7146a3074e4ee7705ee, type: 3}
   HealthBar: {fileID: 3457725375876429455, guid: a004f1488779f5e49981c103c17a745b, type: 3}
   InventoryCapacity: {fileID: 4399734942442439765, guid: e432995154af1404693ddf8251494ea3, type: 3}
-  HealthBarMax: 100
-  HealthBarMin: 0
   healingDone: 12
   DamageTaken: 21
   currentHealthPercentage: 0
@@ -124,7 +123,6 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 200
   InventoryBarMax: 24
-  InventoryBarMin: 0
   InventoryslotsUsed: 0
   InventorySpaceAvailable: 0
 --- !u!114 &6467525476348777249
@@ -153,3 +151,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
   dude: {fileID: 527110599459933490, guid: 17d37f87c1e95df42baea5a6a831bb02, type: 3}
+  ReturnIndex: 0
+--- !u!114 &8553574725003972721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887375814404526371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8964bf56dd76714449b33cecca2790e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopManager
+  Buy: {fileID: 4886137527869175327, guid: bee072f14bc0ce3499804b7982d71f61, type: 3}
+  Sell: {fileID: 7735198642365195192, guid: 8a44e6b40098ac94a851816b80e74f30, type: 3}
+  ExitShop: {fileID: 5377086194015480089, guid: bb4b80df7bd52724ca929222c228a7a3, type: 3}
