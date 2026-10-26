@@ -45,7 +45,7 @@ public class PauseManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
 
         AutoHookupButtons();
-
+        ReturnIndex = menuManager.ReturnIndex;
     }
     private void OnEnable()
     {
@@ -63,18 +63,18 @@ public class PauseManager : MonoBehaviour
     }
     private void AutoHookupButtons()
     {
-        Button startButton = GameObject.Find("RestartGame")?.GetComponent<Button>();
-        if (startButton != null)
+        Button restartButton = GameObject.Find("RestartGame")?.GetComponent<Button>();
+        if (restartButton != null)
         {
-            startButton.onClick.RemoveAllListeners();
-            startButton.onClick.AddListener(onStart);
+            restartButton.onClick.RemoveAllListeners();
+            restartButton.onClick.AddListener(onStart);
         }
 
         Button resumeButton = GameObject.Find("ResumeGame")?.GetComponent<Button>();
         if (resumeButton != null)
         {
-            startButton.onClick.RemoveAllListeners();
-            startButton.onClick.AddListener(onStart);
+            resumeButton.onClick.RemoveAllListeners();
+            resumeButton.onClick.AddListener(onResume);
         }
         Button menuButton = GameObject.Find("Menu")?.GetComponent<Button>();
         if (menuButton != null)
@@ -106,22 +106,18 @@ public class PauseManager : MonoBehaviour
     {
         LoadLevelByIndex(MAIN_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
-      //  StartCoroutine(AddBaseMenuLayer(MAIN_INDEX));
-        // LoadLevelByIndex(MENU_INDEX);
+     
 
     }
-    public void onResume(int targetReturnIndex)
+    public void onResume()
     {
 
-        //if (characterController == null)
-        //{
-        //    dude.SetActive(true);
-        //}
-        if (targetReturnIndex > 0)
+
+        if (ReturnIndex > 0)
         {
             if (dude != null)
             {
-                dude.SetActive(true); 
+                dude.SetActive(true);
             }
         }
         else
@@ -130,28 +126,14 @@ public class PauseManager : MonoBehaviour
         }
 
         RETURNLEVEL_INDEX = ReturnIndex;
-        LoadLevelByIndex(RETURNLEVEL_INDEX);
+        menuManager.LoadLevelByIndex(RETURNLEVEL_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
-
-
-
-        //StartCoroutine(AddSceneLayers(RETURNLEVEL_INDEX));
-
     }
 
 
-    //public void onPause()
-    //{
-    //    if (characterController == null)
-    //    { 
-    //        dude.SetActive( false); 
-    //    }
-    //    ReturnIndex = SceneManager.GetActiveScene().buildIndex;
-    //    LoadLevelByIndex(PAUSE_INDEX);
-    //}
     public void onStart()
     {
         if (GameManager.Instance != null)
@@ -164,43 +146,14 @@ public class PauseManager : MonoBehaviour
             SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
         }
     }
-    public void onLoadNextLevel()
-    {
-        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        LoadLevelByIndex(nextIndex);
-        SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
-        SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
-        SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
-        SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
-    }
-
-    //public IEnumerator AddBaseMenuLayer(int baseLevelIndex)
+    //public void onLoadNextLevel()
     //{
-    //    yield return SceneManager.LoadSceneAsync(baseLevelIndex, LoadSceneMode.Single);// load active level and wait till complete        
-    //    yield return SceneManager.LoadSceneAsync(MENU_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-
-    //    Scene baseScene = SceneManager.GetSceneByBuildIndex(baseLevelIndex);// makse sure added objects  owned by base layer
-    //    if (baseScene.IsValid())
-    //    {
-    //        SceneManager.SetActiveScene(baseScene);
-    //    }
-    //    yield return null;
-
-    //}
-
-    //public IEnumerator AddSceneLayers(int baseLevelIndex)
-    //{
-    //    yield return SceneManager.LoadSceneAsync(baseLevelIndex, LoadSceneMode.Single);// load active level and wait till complete        
-    //    yield return SceneManager.LoadSceneAsync(MENU_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(HUD_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(PLAYER_INDEX, LoadSceneMode.Additive);// load scene layer fully then on to next
-    //    yield return SceneManager.LoadSceneAsync(ENVIRONMENT_INDEX, LoadSceneMode.Additive);// load scene layer fully 
-    //    Scene baseScene = SceneManager.GetSceneByBuildIndex(baseLevelIndex);// makse sure added objects  owned by base layer
-    //    if (baseScene.IsValid())
-    //    {
-    //        SceneManager.SetActiveScene(baseScene);
-    //    }
-    //    yield return null;
+    //    int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+    //    LoadLevelByIndex(nextIndex);
+    //    SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+    //    SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
+    //    SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
+    //    SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
     //}
 
 }

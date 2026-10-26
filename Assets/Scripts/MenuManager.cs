@@ -32,7 +32,8 @@ public class MenuManager : MonoBehaviour
     private const int ENVIRONMENT_INDEX = 8;
     private const int SHOP_INDEX = 9;
     private int RETURNLEVEL_INDEX;
-    private int ReturnIndex;
+    public int ReturnIndex;
+ 
 
     private int nextIndex;
     public void Awake()

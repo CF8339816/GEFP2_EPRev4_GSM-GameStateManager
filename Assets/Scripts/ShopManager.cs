@@ -52,42 +52,41 @@ public class ShopManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject); // keeps script accessable accross scene changes
+        AutoHookupButtonsShop();
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        AutoHookupButtonsShop();
     }
     public void AutoHookupButtonsShop()
     {
-        if (ShopManager.Instance == null)
+        Button BuyButton = GameObject.Find("Buy")?.GetComponent<Button>();
+        if (BuyButton != null)
         {
-            Debug.LogError("InterfaceManager: Scenemanager.Instance is null! Cannot hook up buttons.");
-            return;
+            BuyButton.onClick.RemoveAllListeners();
+            BuyButton.onClick.AddListener(HudManager.Instance.onAddItem);
+        }
+        Button SellButton = GameObject.Find("Sell")?.GetComponent<Button>();
+        if (SellButton != null)
+        {
+            SellButton.onClick.RemoveAllListeners();
+            SellButton.onClick.AddListener(HudManager.Instance.onRemoveItem);
         }
 
-        ShopManager shopManager = ShopManager.Instance;// reinitalize the scene manager
-
-        if (Buy != null)
+        Button exitShopButton = GameObject.Find("ExitShop")?.GetComponent<Button>();
+        if (exitShopButton != null)
         {
-            Buy.onClick.RemoveAllListeners();
-            Buy.onClick.AddListener(HudManager.Instance.onAddItem);
-            Debug.Log("🎯 Found and linked: Buy");
-        }
-        else
-        {
-            Debug.LogWarning("❌ Could NOT find Button GameObject named: Buy");
-        }
-        if (Sell != null)
-        {
-            Sell.onClick.RemoveAllListeners();
-            Sell.onClick.AddListener(HudManager.Instance.onRemoveItem);
-            Debug.Log("🎯 Found and linked: Sell");
-        }
-        else
-        {
-            Debug.LogWarning("❌ Could NOT find Button GameObject named: Sell");
-        }                
-       
-        if (GameExitManager.Instance != null)
-        {
-            GameExitManager.Instance.ConnectExitUI();
+            exitShopButton.onClick.RemoveAllListeners();
+            exitShopButton.onClick.AddListener(onExitShop);
         }
     }
 
