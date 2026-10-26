@@ -52,7 +52,7 @@ public class ShopManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject); // keeps script accessable accross scene changes
-        AutoHookupButtonsShop();
+        AutoHookupShopButtons();
     }
     private void OnEnable()
     {
@@ -65,9 +65,9 @@ public class ShopManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        AutoHookupButtonsShop();
+        AutoHookupShopButtons();
     }
-    public void AutoHookupButtonsShop()
+    public void AutoHookupShopButtons()
     {
         Button BuyButton = GameObject.Find("Buy")?.GetComponent<Button>();
         if (BuyButton != null)

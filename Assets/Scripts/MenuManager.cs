@@ -48,7 +48,7 @@ public class MenuManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
 
-        AutoHookupButtons();
+        AutoHookupMenuButtons();
 
     }
     private void OnEnable()
@@ -63,9 +63,9 @@ public class MenuManager : MonoBehaviour
    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        AutoHookupButtons();
+        AutoHookupMenuButtons();
     }
-    private void AutoHookupButtons()
+    private void AutoHookupMenuButtons()
     {
         Button startButton = GameObject.Find("StartGame")?.GetComponent<Button>();
         if (startButton != null)

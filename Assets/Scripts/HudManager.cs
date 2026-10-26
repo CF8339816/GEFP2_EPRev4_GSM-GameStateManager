@@ -65,7 +65,7 @@ public class HudManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
 
-        AutoHookupButtons();
+        AutoHookupHudButtons();
         FindUIElementsInNewScene();
 
     }
@@ -89,9 +89,9 @@ public class HudManager : MonoBehaviour
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        AutoHookupButtons();
+        AutoHookupHudButtons();
     }
-    private void AutoHookupButtons()
+    private void AutoHookupHudButtons()
     {
        
         if (HudManager.Instance != null)

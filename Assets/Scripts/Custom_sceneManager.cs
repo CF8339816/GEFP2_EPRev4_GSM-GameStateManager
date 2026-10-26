@@ -64,6 +64,11 @@ public class Custom_sceneManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //  AutoHookupButtons();
+        //MenuManager.AutoHookupMenuButtons();
+        //AutoHookupHUDButtons();
+        //AutoHookupPauseButtons();
+        //AutoHookupShopButtons();
+        //AutoHookupHudOutputs();
+
     }
 }

@@ -44,8 +44,13 @@ public class PauseManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
 
-        AutoHookupButtons();
-        ReturnIndex = menuManager.ReturnIndex;
+        AutoHookupPauseButtons();
+       
+    }
+
+    public void Update()
+    {
+     ReturnIndex = menuManager.ReturnIndex;
     }
     private void OnEnable()
     {
@@ -59,9 +64,9 @@ public class PauseManager : MonoBehaviour
    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        AutoHookupButtons();
+        AutoHookupPauseButtons();
     }
-    private void AutoHookupButtons()
+    private void AutoHookupPauseButtons()
     {
         Button restartButton = GameObject.Find("RestartGame")?.GetComponent<Button>();
         if (restartButton != null)
