@@ -32,7 +32,7 @@ public class HudManager : MonoBehaviour
     private int ReturnIndex;
 
     [Header("text output")]
-    public TextMeshProUGUI textCurrentLevel;
+    //public TextMeshProUGUI textCurrentLevel;
     public TextMeshProUGUI textHealthText;
     public TextMeshProUGUI textInventoryAvaillabilityText;
     [Header("sliders")]
@@ -84,52 +84,73 @@ public class HudManager : MonoBehaviour
         if (textInventoryAvaillabilityText == null) textInventoryAvaillabilityText = GameObject.Find("InventoryAvaillabilityText")?.GetComponent<TextMeshProUGUI>();
         if (HealthBar == null) HealthBar = GameObject.Find("HealthBar")?.GetComponent<Slider>();
         if (InventoryCapacity == null) InventoryCapacity = GameObject.Find("InventoryCapacity")?.GetComponent<Slider>();
-        if (textCurrentLevel == null) textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
+        //if (textCurrentLevel == null) textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
 
     }
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AutoHookupHudButtons();
+        FindUIElementsInNewScene();
+        //UpdateCurrentLevelOutput();
+        UpdateHealthBar();
+        UpdateBagSpace();
+
     }
     private void AutoHookupHudButtons()
     {
        
         if (HudManager.Instance != null)
         {
+            //Button takeDamageButton = GameObject.Find("takeDamage")?.GetComponent<Button>();
+            //if (takeDamageButton != null)
+            //{
+            //    takeDamageButton.onClick.RemoveAllListeners();
+            //    takeDamageButton.onClick.AddListener(HudManager.Instance.onTakeDamage);
+            //}
+
             Button takeDamageButton = GameObject.Find("takeDamage")?.GetComponent<Button>();
             if (takeDamageButton != null)
             {
                 takeDamageButton.onClick.RemoveAllListeners();
-                takeDamageButton.onClick.AddListener(HudManager.Instance.onTakeDamage);
+                takeDamageButton.onClick.AddListener(onTakeDamage);
             }
+
             Button HealButton = GameObject.Find("Heal")?.GetComponent<Button>();
             if (HealButton != null)
             {
                 HealButton.onClick.RemoveAllListeners();
-                HealButton.onClick.AddListener(HudManager.Instance.onTakeHealing);
+                HealButton.onClick.AddListener(onTakeHealing);
             }
             Button AddItemButton = GameObject.Find("AddItem")?.GetComponent<Button>();
             if (AddItemButton != null)
             {
                 AddItemButton.onClick.RemoveAllListeners();
-                AddItemButton.onClick.AddListener(HudManager.Instance.onAddItem);
+                AddItemButton.onClick.AddListener(onAddItem);
             }
             Button removeItemButton = GameObject.Find("removeItem")?.GetComponent<Button>();
             if (removeItemButton != null)
             {
                 removeItemButton.onClick.RemoveAllListeners();
-                removeItemButton.onClick.AddListener(HudManager.Instance.onRemoveItem);
-            }
+                removeItemButton.onClick.AddListener(onRemoveItem);
+            }                  
         }
     }
-    public void UpdateCurrentLevelOutput()
+    public void UpdateHud()
     {
-        if (textCurrentLevel != null)
-        {
-            string CurrentScene = SceneManager.GetActiveScene().name;
-            textCurrentLevel.text = "Current Level Loaded: " + CurrentScene;
-        }
+        //menuManager.UpdateCurrentLevelOutput();
+        UpdateHealthBar();
+        UpdateBagSpace();
     }
+
+
+    //public void UpdateCurrentLevelOutput()
+    //{
+    //    if (textCurrentLevel != null)
+    //    {
+    //        string CurrentScene = SceneManager.GetActiveScene().name;
+    //        textCurrentLevel.text = "Current Level Loaded: " + CurrentScene;
+    //    }
+    //}
     public void UpdateBagSpace()
     {
         InventorySpaceAvailable = InventoryBarMax - InventoryslotsUsed;
@@ -147,13 +168,17 @@ public class HudManager : MonoBehaviour
         currentHealth -= DamageTaken;
         if (currentHealth <= 0) { currentHealth = 0; }
         CalculateHealthPercentage();
+        UpdateHud();
     }
     public void onTakeHealing()
     {
         currentHealth += healingDone;
         if (currentHealth >= maxHealth) { currentHealth = maxHealth; }
         CalculateHealthPercentage();
+        UpdateHud();
     }
+
+
     public void CalculateHealthPercentage()
     {
         currentHealthPercentage = Mathf.RoundToInt((currentHealth / maxHealth) * 100);
@@ -161,10 +186,12 @@ public class HudManager : MonoBehaviour
     public void onAddItem()
     {
         if (InventoryslotsUsed < InventoryBarMax) { InventoryslotsUsed++; }
+        UpdateHud();
     }
     public void onRemoveItem()
     {
         if (InventoryslotsUsed > 0) { InventoryslotsUsed--; }
+        UpdateHud();
     }
     public void onResetStats()
     {
@@ -173,6 +200,7 @@ public class HudManager : MonoBehaviour
         CalculateHealthPercentage();
         if (HealthBar != null) { HealthBar.value = currentHealthPercentage; }
         if (InventoryCapacity != null) { InventoryCapacity.value = InventoryslotsUsed; }
+        UpdateHud();
     }
   
 }

@@ -46,10 +46,9 @@ public class ServiceHub : MonoBehaviour
         if (hudManager == null) hudManager = GetComponent<HudManager>();
         if (menuManager == null) menuManager = GetComponent<MenuManager>();
         if (pauseManager == null) pauseManager = GetComponent<PauseManager>();
-        InitializeGlobalEventSystem();
-        InitializeGlobalCameraSystem();
+        if (shopManager == null) shopManager = GetComponent<ShopManager>();
     }
-    private void InitializeGlobalEventSystem()
+   public void InitializeGlobalEventSystem()
     {
         EventSystem existingSystem = Object.FindFirstObjectByType<EventSystem>();// checks for extra event systems
 
@@ -64,7 +63,7 @@ public class ServiceHub : MonoBehaviour
             DontDestroyOnLoad(spawnedSystem);
         }
     }
-    private void InitializeGlobalCameraSystem() 
+    public void InitializeGlobalCameraSystem()
     {
         Camera existingCamera = Object.FindFirstObjectByType<Camera>();
         if (existingCamera != null)
@@ -82,8 +81,10 @@ public class ServiceHub : MonoBehaviour
 
     private void Start()
     {
-        
-        //_BS1_.Instance.TestBS();
+
+        _BS1_.Instance.TestBS();
+
+        soft_BS_Load.Instance.soft_BS_LoadTest();
     }
 
 

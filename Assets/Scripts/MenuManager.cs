@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 using static UnityEngine.UIElements.UxmlAttributeDescription;
 #region coder & project
 /// <summary>
@@ -18,7 +19,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance { get; private set; }
     private GameManager gameManager;
     private GameExitManager gameExitManager;
- 
+    public TextMeshProUGUI textCurrentLevel;
     [SerializeField] GameObject dude;
 
     private const int MAIN_INDEX = 0;
@@ -32,8 +33,8 @@ public class MenuManager : MonoBehaviour
     private const int ENVIRONMENT_INDEX = 8;
     private const int SHOP_INDEX = 9;
     private int RETURNLEVEL_INDEX;
-    public int ReturnIndex;
- 
+    public int ReturnPauseIndex;
+    public int ReturnShopIndex;
 
     private int nextIndex;
     public void Awake()
@@ -67,6 +68,8 @@ public class MenuManager : MonoBehaviour
     }
     private void AutoHookupMenuButtons()
     {
+        if (textCurrentLevel == null) textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
+
         Button startButton = GameObject.Find("StartGame")?.GetComponent<Button>();
         if (startButton != null)
         {
@@ -85,6 +88,20 @@ public class MenuManager : MonoBehaviour
             menuButton.onClick.RemoveAllListeners();
             menuButton.onClick.AddListener(onMenu);
         }
+
+        Button pauseButton = GameObject.Find("PauseGame")?.GetComponent<Button>();
+        if (menuButton != null)
+        {
+            menuButton.onClick.RemoveAllListeners();
+            menuButton.onClick.AddListener(onMenu);
+        }
+        Button shopButton = GameObject.Find("Shop")?.GetComponent<Button>();
+        if (menuButton != null)
+        {
+            menuButton.onClick.RemoveAllListeners();
+            menuButton.onClick.AddListener(onMenu);
+        }
+
         Button level1Button = GameObject.Find("Level1")?.GetComponent<Button>();
         if (level1Button != null)
         {
@@ -119,7 +136,7 @@ public class MenuManager : MonoBehaviour
     }
     public void LoadLevelByIndex(int index)
     {
-        if (index >= 0 && index < 4) 
+        if (index >= 0 && index < 10) 
         {
             SceneManager.LoadScene(index);
     
@@ -171,7 +188,8 @@ public class MenuManager : MonoBehaviour
         {
             dude.SetActive(false); 
         }
-        ReturnIndex = SceneManager.GetActiveScene().buildIndex;
+        ReturnPauseIndex = SceneManager.GetActiveScene().buildIndex;
+      
         LoadLevelByIndex(PAUSE_INDEX);
     }
 
@@ -179,7 +197,8 @@ public class MenuManager : MonoBehaviour
     {
        
       
-        ReturnIndex = SceneManager.GetActiveScene().buildIndex;
+        ReturnShopIndex = SceneManager.GetActiveScene().buildIndex;
+      
         LoadLevelByIndex(SHOP_INDEX);
     }
 

@@ -40,7 +40,7 @@ public class ShopManager : MonoBehaviour
     private const int ENVIRONMENT_INDEX = 8;
     private const int SHOP_INDEX = 9;
     private int RETURNLEVEL_INDEX;
-    private int ReturnIndex;
+   
 
   
     void Awake()
@@ -92,7 +92,7 @@ public class ShopManager : MonoBehaviour
 
     public void onExitShop()
     {
-        RETURNLEVEL_INDEX = ReturnIndex;
+        RETURNLEVEL_INDEX = menuManager.ReturnShopIndex;
         menuManager.LoadLevelByIndex(RETURNLEVEL_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);

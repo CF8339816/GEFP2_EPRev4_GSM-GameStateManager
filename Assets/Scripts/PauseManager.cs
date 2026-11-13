@@ -18,7 +18,7 @@ public class PauseManager : MonoBehaviour
     private GameManager gameManager;
     private GameExitManager gameExitManager;
     private MenuManager menuManager;
-   // private CharacterController characterController;
+
     [SerializeField] GameObject dude;
     private const int MAIN_INDEX = 0;
     private const int LEVEL_1_INDEX = 1;
@@ -31,10 +31,10 @@ public class PauseManager : MonoBehaviour
     private const int ENVIRONMENT_INDEX = 8;
     private const int SHOP_INDEX = 9;
     private int RETURNLEVEL_INDEX;
-    private int ReturnIndex;
+    //private int ReturnIndex;
     public void Awake()
     {
-        //OnSceneLoaded(Scene, LoadSceneMode);
+      
         Debug.Log("CustomSceneManager awakening...");
         if (Instance != null && Instance != this)
         {
@@ -118,7 +118,7 @@ public class PauseManager : MonoBehaviour
     {
 
 
-        if (ReturnIndex > 0)
+        if (menuManager.ReturnPauseIndex > 0 && menuManager.ReturnPauseIndex < 4)
         {
             if (dude != null)
             {
@@ -130,7 +130,7 @@ public class PauseManager : MonoBehaviour
             dude.SetActive(false);
         }
 
-        RETURNLEVEL_INDEX = ReturnIndex;
+        RETURNLEVEL_INDEX = menuManager.ReturnPauseIndex;
         menuManager.LoadLevelByIndex(RETURNLEVEL_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
@@ -151,14 +151,5 @@ public class PauseManager : MonoBehaviour
             SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
         }
     }
-    //public void onLoadNextLevel()
-    //{
-    //    int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
-    //    LoadLevelByIndex(nextIndex);
-    //    SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
-    //    SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
-    //    SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
-    //    SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
-    //}
-
+  
 }

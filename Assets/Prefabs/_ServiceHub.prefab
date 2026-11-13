@@ -111,7 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52694c778c26e1744968ede3fd8e2e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HudManager
-  textCurrentLevel: {fileID: 1777489927517506853, guid: a57eb531b8ba70347b8b0654f58c7cd4, type: 3}
   textHealthText: {fileID: 1038304739855121096, guid: 84717daa13dcd4547beb94d9cc6d809a, type: 3}
   textInventoryAvaillabilityText: {fileID: 2721504607572633492, guid: 9a81feb2239ec7146a3074e4ee7705ee, type: 3}
   HealthBar: {fileID: 3457725375876429455, guid: a004f1488779f5e49981c103c17a745b, type: 3}
@@ -150,8 +149,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1370c68bce237724d8f1971b18ea7089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
+  textCurrentLevel: {fileID: 1777489927517506853, guid: a57eb531b8ba70347b8b0654f58c7cd4, type: 3}
   dude: {fileID: 527110599459933490, guid: 17d37f87c1e95df42baea5a6a831bb02, type: 3}
-  ReturnIndex: 0
+  ReturnPauseIndex: 0
+  ReturnShopIndex: 0
 --- !u!114 &8553574725003972721
 MonoBehaviour:
   m_ObjectHideFlags: 0
