@@ -45,7 +45,7 @@ public class _BS1_ : MonoBehaviour
     public MenuManager menuManager;
     public ShopManager shopManager;
     public PauseManager pauseManager;
-    //public GameManager gameManager;
+
     public GameExitManager gameExitManager;
 
     public GameObject cameraPrefab;
@@ -80,19 +80,19 @@ public class _BS1_ : MonoBehaviour
 
         DontDestroyOnLoad(gameObject); // prevents  boostrapper from being destroyed on multiscene load
         Debug.Log("Initalize Event System.");
-        //ServiceHub.Instance.InitializeGlobalEventSystem();
+       
         InitializeGlobalEventSystem();
         Debug.Log("EventSystem Initalized!!!!!");
         Debug.Log("Initalizing camera system");
         InitializeGlobalCameraSystem();
-        //ServiceHub.Instance.InitializeGlobalCameraSystem();
+    
         Debug.Log("Cameras initalized Initalized!!!");
         Debug.Log(" Menu  awakening...");
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         Debug.Log(" menu loaded...");
 
 
-        //if (gameManager == null) gameManager = GetComponent<GameManager>();
+      
         if (gameExitManager == null) gameExitManager = GetComponent<GameExitManager>();
         if (hudManager == null) hudManager = GetComponent<HudManager>();
         if (menuManager == null) menuManager = GetComponent<MenuManager>();
