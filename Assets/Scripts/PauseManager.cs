@@ -50,7 +50,7 @@ public class PauseManager : MonoBehaviour
 
     public void Update()
     {
-     ReturnIndex = menuManager.ReturnIndex;
+  //   ReturnIndex = menuManager.ReturnIndex;
     }
     private void OnEnable()
     {

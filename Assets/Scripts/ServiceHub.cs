@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Collections;
+
 #region coder & project
 /// <summary>
 /// NSCC GAME2025 / 4086 / Game Programming III(B)/ Doucette,Matthew
@@ -27,6 +31,8 @@ public class ServiceHub : MonoBehaviour
 
     private void Awake()
     {
+        
+        
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject); //destroy whole object
@@ -72,4 +78,18 @@ public class ServiceHub : MonoBehaviour
             DontDestroyOnLoad(spawnedCamera);
         }
     }
+
+
+    private void Start()
+    {
+        
+        //_BS1_.Instance.TestBS();
+    }
+
+
+
+
 }
+
+
+

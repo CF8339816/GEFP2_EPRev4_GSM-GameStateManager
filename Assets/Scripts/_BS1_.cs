@@ -21,6 +21,9 @@ public static class PerformBootstrap
                 return;
             }
 
+
+            Debug.Log("Loading Bootstrp scene"+SceneName);
+
         }
 
          SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);  // loads bootstrap adatively
@@ -35,15 +38,42 @@ public static class PerformBootstrap
 
 public class _BS1_ : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    public static _BS1_ Instance { get; private set; } = null;
+     void Awake()
     {
-        
+
+
+        if (Instance != null && Instance != this)// checks for multiples
+        {
+            Debug.Log("Bootstrap found on " + gameObject.name);
+            
+            Destroy(gameObject); //destroy whole object
+            return;
+        }
+
+        Debug.Log("Bootstrapinitalized");
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject); // prevents  boostrapper from being destroyed on multiscene load
     }
 
-    // Update is called once per frame
-    void Update()
+    public void TestBS()
     {
-        
+        Debug.Log("Bootstrap Functioning correctly" + gameObject.name);
+
     }
+
 }
+    //// Start is called once before the first execution of Update after the MonoBehaviour is created
+    //void Start()
+    //{
+
+    //}
+
+    //// Update is called once per frame
+    //void Update()
+    //{
+
+    //}
+
