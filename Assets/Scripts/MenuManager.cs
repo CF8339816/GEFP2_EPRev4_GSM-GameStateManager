@@ -17,7 +17,7 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }
-    private GameManager gameManager;
+    //private GameManager gameManager;
     private GameExitManager gameExitManager;
     public TextMeshProUGUI textCurrentLevel;
     [SerializeField] GameObject dude;
@@ -32,7 +32,7 @@ public class MenuManager : MonoBehaviour
     private const int PLAYER_INDEX = 7;
     private const int ENVIRONMENT_INDEX = 8;
     private const int SHOP_INDEX = 9;
-    private int RETURNLEVEL_INDEX;
+  
     public int ReturnPauseIndex;
     public int ReturnShopIndex;
 
@@ -48,7 +48,7 @@ public class MenuManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject); // keeps script accessible across scene changes
-
+        if (textCurrentLevel == null) textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
         AutoHookupMenuButtons();
 
     }
@@ -65,10 +65,12 @@ public class MenuManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AutoHookupMenuButtons();
+        UpdateCurrentLevelOutput();
+
     }
     private void AutoHookupMenuButtons()
     {
-        if (textCurrentLevel == null) textCurrentLevel = GameObject.Find("CurrentLevel")?.GetComponent<TextMeshProUGUI>();
+      
 
         Button startButton = GameObject.Find("StartGame")?.GetComponent<Button>();
         if (startButton != null)
@@ -149,8 +151,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
-        dude.SetActive(true);
-      
+        if (dude != null)
+        {
+            dude.SetActive(true);
+        }
+        UpdateCurrentLevelOutput();
     }
     public void onLevel2()
     {
@@ -159,9 +164,12 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
-        dude.SetActive(true);
+        if (dude != null)
+        {
+            dude.SetActive(true);
+        }
+        UpdateCurrentLevelOutput();
 
-    
     }
     public void onLevel3()
     {
@@ -170,14 +178,17 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
-        dude.SetActive(true);
-     
+        if (dude != null)
+        {
+            dude.SetActive(true);
+        }
+        UpdateCurrentLevelOutput();
     }
     public void onMenu()
     {
         LoadLevelByIndex(MAIN_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
-     
+        UpdateCurrentLevelOutput();
     }
    
     public void onPause()
@@ -191,6 +202,7 @@ public class MenuManager : MonoBehaviour
         ReturnPauseIndex = SceneManager.GetActiveScene().buildIndex;
       
         LoadLevelByIndex(PAUSE_INDEX);
+        UpdateCurrentLevelOutput();
     }
 
     public void onShopEnter()
@@ -200,6 +212,15 @@ public class MenuManager : MonoBehaviour
         ReturnShopIndex = SceneManager.GetActiveScene().buildIndex;
       
         LoadLevelByIndex(SHOP_INDEX);
+        SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
+        SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
+        if (dude != null)
+        {
+            dude.SetActive(true);
+        }
+        UpdateCurrentLevelOutput();
     }
 
     public void onStart()
@@ -208,6 +229,7 @@ public class MenuManager : MonoBehaviour
         {
             HudManager.Instance.onResetStats();
             onLevel1();
+            UpdateCurrentLevelOutput();
         }
     }
     public void onLoadNextLevel()
@@ -220,13 +242,22 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
-         }
+            UpdateCurrentLevelOutput();
+        }
         else
         {
             onMenu();
+            UpdateCurrentLevelOutput();
         }
         
     }
+    public void UpdateCurrentLevelOutput()
+    {
+        if (textCurrentLevel != null)
+        {
+            string CurrentScene = SceneManager.GetActiveScene().name;
+           textCurrentLevel.text = "Current Level Loaded: " + CurrentScene;
+        }
+    }
 
-  
 }

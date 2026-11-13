@@ -40,16 +40,27 @@ public static class PerformBootstrap
 public class _BS1_ : MonoBehaviour
 {
     [Header("System References")]// defines other scripts
-    public Custom_sceneManager customSceneManager { get; private set; }= null;
-public HudManager hudManager { get; private set; } = null;
-    public MenuManager menuManager { get; private set; } = null;
-    public ShopManager shopManager { get; private set; } = null;
-    public PauseManager pauseManager { get; private set; } = null;
-    public GameManager gameManager { get; private set; } = null;
-    public GameExitManager gameExitManager { get; private set; } = null;
-    public ServiceHub serviceHub { get; private set; } = null;
-    public GameObject cameraPrefab { get; private set; } = null;
-    public GameObject eventSystemPrefab { get; private set; } = null;
+
+    public HudManager hudManager;
+    public MenuManager menuManager;
+    public ShopManager shopManager;
+    public PauseManager pauseManager;
+    //public GameManager gameManager;
+    public GameExitManager gameExitManager;
+
+    public GameObject cameraPrefab;
+    public GameObject eventSystemPrefab;
+
+    private const int MAIN_INDEX = 0;
+    private const int LEVEL_1_INDEX = 1;
+    private const int LEVEL_2_INDEX = 2;
+    private const int LEVEL_3_INDEX = 3;
+    private const int MENU_INDEX = 4;
+    private const int HUD_INDEX = 5;
+    private const int PAUSE_INDEX = 6;
+    private const int PLAYER_INDEX = 7;
+    private const int ENVIRONMENT_INDEX = 8;
+    private const int SHOP_INDEX = 9;
 
     public static _BS1_ Instance { get; private set; } = null;
      void Awake()
@@ -69,40 +80,61 @@ public HudManager hudManager { get; private set; } = null;
 
         DontDestroyOnLoad(gameObject); // prevents  boostrapper from being destroyed on multiscene load
         Debug.Log("Initalize Event System.");
-        ServiceHub.Instance.InitializeGlobalEventSystem();
+        //ServiceHub.Instance.InitializeGlobalEventSystem();
+        InitializeGlobalEventSystem();
         Debug.Log("EventSystem Initalized!!!!!");
         Debug.Log("Initalizing camera system");
-        ServiceHub.Instance.InitializeGlobalCameraSystem();
+        InitializeGlobalCameraSystem();
+        //ServiceHub.Instance.InitializeGlobalCameraSystem();
         Debug.Log("Cameras initalized Initalized!!!");
+        Debug.Log(" Menu  awakening...");
+        SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
+        Debug.Log(" menu loaded...");
 
-        if (serviceHub == null) serviceHub = GetComponent<ServiceHub>();
-        if (customSceneManager == null) customSceneManager = GetComponent<Custom_sceneManager>();
-        if (gameManager == null) gameManager = GetComponent<GameManager>();
+
+        //if (gameManager == null) gameManager = GetComponent<GameManager>();
         if (gameExitManager == null) gameExitManager = GetComponent<GameExitManager>();
         if (hudManager == null) hudManager = GetComponent<HudManager>();
         if (menuManager == null) menuManager = GetComponent<MenuManager>();
         if (pauseManager == null) pauseManager = GetComponent<PauseManager>();
+        if (shopManager == null) shopManager = GetComponent<ShopManager>();
 
 
-
-
- }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateCurrentLevelOutput();
     }
 
-
-    public void UpdateCurrentLevelOutput()
+    public void InitializeGlobalEventSystem()
     {
-        if (menuManager.textCurrentLevel != null)
+        EventSystem existingSystem = Object.FindFirstObjectByType<EventSystem>();// checks for extra event systems
+
+        if (existingSystem != null)
         {
-            string CurrentScene = SceneManager.GetActiveScene().name;
-            menuManager.textCurrentLevel.text = "Current Level Loaded: " + CurrentScene;
+            DontDestroyOnLoad(existingSystem.gameObject); // keeps it from being destroyed.
+        }
+        else if (eventSystemPrefab != null)
+        {
+            GameObject spawnedSystem = Instantiate(eventSystemPrefab);// creates one if  not found
+            spawnedSystem.name = "Global_EventSystem";
+            DontDestroyOnLoad(spawnedSystem);
         }
     }
+    public void InitializeGlobalCameraSystem()
+    {
+        Camera existingCamera = Object.FindFirstObjectByType<Camera>();
+        if (existingCamera != null)
+        {
+            DontDestroyOnLoad(existingCamera.gameObject);
+        }
+        else if (cameraPrefab != null)
+        {
+            GameObject spawnedCamera = Instantiate(cameraPrefab);
+            spawnedCamera.name = "Global_CameraSystem";
+            DontDestroyOnLoad(spawnedCamera);
+        }
+    }
+
+
+
+
 
     public void TestBS()
     {

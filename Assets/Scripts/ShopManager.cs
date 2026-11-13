@@ -16,11 +16,11 @@ using TMPro;
 public class ShopManager : MonoBehaviour
 {
     public static ShopManager Instance { get; private set; }
-    private GameManager gameManager;
+    //private GameManager gameManager;
     private GameExitManager gameExitManager;
-    private ServiceHub serviceHub;
+    private _BS1_ serviceHub;
     //private SceneManager sceneManager;
-    private Custom_sceneManager customSceneManager;
+    
     private HudManager hudManager;
     private MenuManager menuManager;
     //private ShopManager shopManager;
@@ -39,7 +39,7 @@ public class ShopManager : MonoBehaviour
     private const int PLAYER_INDEX = 7;
     private const int ENVIRONMENT_INDEX = 8;
     private const int SHOP_INDEX = 9;
-    private int RETURNLEVEL_INDEX;
+    private int RETURNLEVELSHOP_INDEX;
    
 
   
@@ -92,8 +92,8 @@ public class ShopManager : MonoBehaviour
 
     public void onExitShop()
     {
-        RETURNLEVEL_INDEX = menuManager.ReturnShopIndex;
-        menuManager.LoadLevelByIndex(RETURNLEVEL_INDEX);
+        RETURNLEVELSHOP_INDEX = menuManager.ReturnShopIndex;
+        menuManager.LoadLevelByIndex(RETURNLEVELSHOP_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);

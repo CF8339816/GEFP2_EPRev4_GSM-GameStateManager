@@ -15,7 +15,7 @@ using UnityEngine.InputSystem;
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance { get; private set; }
-    private GameManager gameManager;
+    //private GameManager gameManager;
     private GameExitManager gameExitManager;
     private MenuManager menuManager;
 
@@ -30,7 +30,7 @@ public class PauseManager : MonoBehaviour
     private const int PLAYER_INDEX = 7;
     private const int ENVIRONMENT_INDEX = 8;
     private const int SHOP_INDEX = 9;
-    private int RETURNLEVEL_INDEX;
+    private int RETURNLEVELPAUSE_INDEX;
     //private int ReturnIndex;
     public void Awake()
     {
@@ -130,8 +130,8 @@ public class PauseManager : MonoBehaviour
             dude.SetActive(false);
         }
 
-        RETURNLEVEL_INDEX = menuManager.ReturnPauseIndex;
-        menuManager.LoadLevelByIndex(RETURNLEVEL_INDEX);
+        RETURNLEVELPAUSE_INDEX = menuManager.ReturnPauseIndex;
+        menuManager.LoadLevelByIndex(RETURNLEVELPAUSE_INDEX);
         SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
         SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
@@ -141,14 +141,11 @@ public class PauseManager : MonoBehaviour
 
     public void onStart()
     {
-        if (GameManager.Instance != null)
+        if (MenuManager.Instance != null)
         {
             HudManager.Instance.onResetStats();
             menuManager.onLevel1();
-            SceneManager.LoadScene(MENU_INDEX, LoadSceneMode.Additive);
-            SceneManager.LoadScene(HUD_INDEX, LoadSceneMode.Additive);
-            SceneManager.LoadScene(PLAYER_INDEX, LoadSceneMode.Additive);
-            SceneManager.LoadScene(ENVIRONMENT_INDEX, LoadSceneMode.Additive);
+           
         }
     }
   

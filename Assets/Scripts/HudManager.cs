@@ -16,7 +16,7 @@ using UnityEngine.UI;
 public class HudManager : MonoBehaviour
 {
     public static HudManager Instance { get; private set; }
-    private GameManager gameManager;
+    //private GameManager gameManager;
     private GameExitManager gameExitManager;
     private const int MAIN_INDEX = 0;
     private const int LEVEL_1_INDEX = 1;
@@ -67,6 +67,7 @@ public class HudManager : MonoBehaviour
 
         AutoHookupHudButtons();
         FindUIElementsInNewScene();
+        RefreshTheHUD();
 
     }
     private void OnEnable()
@@ -94,7 +95,7 @@ public class HudManager : MonoBehaviour
         //UpdateCurrentLevelOutput();
         UpdateHealthBar();
         UpdateBagSpace();
-
+        RefreshTheHUD();
     }
     private void AutoHookupHudButtons()
     {
@@ -135,7 +136,7 @@ public class HudManager : MonoBehaviour
             }                  
         }
     }
-    public void UpdateHud()
+    public void RefreshTheHUD()
     {
         //menuManager.UpdateCurrentLevelOutput();
         UpdateHealthBar();
@@ -154,28 +155,36 @@ public class HudManager : MonoBehaviour
     public void UpdateBagSpace()
     {
         InventorySpaceAvailable = InventoryBarMax - InventoryslotsUsed;
-        InventoryCapacity.value = InventoryslotsUsed;
-        textInventoryAvaillabilityText.text = "Slots available" + InventorySpaceAvailable.ToString() + "\nInventory used: " + InventoryslotsUsed.ToString() + "/" + InventoryBarMax.ToString();
+        if (InventoryCapacity != null)
+        { 
+            InventoryCapacity.value = InventoryslotsUsed; 
+        }
+        if (textInventoryAvaillabilityText != null)
+            textInventoryAvaillabilityText.text = "Slots available" + InventorySpaceAvailable.ToString() + "\nInventory used: " + InventoryslotsUsed.ToString() + "/" + InventoryBarMax.ToString();
     }
     public void UpdateHealthBar()
     {
         healtBarOutput = currentHealthPercentage;
-        HealthBar.value = healtBarOutput;
-        textHealthText.text = "Health %: " + currentHealthPercentage.ToString() + "\nHealth: " + currentHealth.ToString() + "/" + maxHealth.ToString();
+        if (HealthBar != null) 
+        { 
+            HealthBar.value = healtBarOutput; 
+        }
+        if (textHealthText != null)
+            textHealthText.text = "Health %: " + currentHealthPercentage.ToString() + "\nHealth: " + currentHealth.ToString() + "/" + maxHealth.ToString();
     }
     public void onTakeDamage()
     {
         currentHealth -= DamageTaken;
         if (currentHealth <= 0) { currentHealth = 0; }
         CalculateHealthPercentage();
-        UpdateHud();
+        RefreshTheHUD();
     }
     public void onTakeHealing()
     {
         currentHealth += healingDone;
         if (currentHealth >= maxHealth) { currentHealth = maxHealth; }
         CalculateHealthPercentage();
-        UpdateHud();
+        RefreshTheHUD();
     }
 
 
@@ -186,12 +195,12 @@ public class HudManager : MonoBehaviour
     public void onAddItem()
     {
         if (InventoryslotsUsed < InventoryBarMax) { InventoryslotsUsed++; }
-        UpdateHud();
+        RefreshTheHUD();
     }
     public void onRemoveItem()
     {
         if (InventoryslotsUsed > 0) { InventoryslotsUsed--; }
-        UpdateHud();
+        RefreshTheHUD();
     }
     public void onResetStats()
     {
@@ -200,7 +209,7 @@ public class HudManager : MonoBehaviour
         CalculateHealthPercentage();
         if (HealthBar != null) { HealthBar.value = currentHealthPercentage; }
         if (InventoryCapacity != null) { InventoryCapacity.value = InventoryslotsUsed; }
-        UpdateHud();
+        RefreshTheHUD();
     }
   
 }
